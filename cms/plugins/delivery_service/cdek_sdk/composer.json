@@ -1,0 +1,29 @@
+{
+  "name": "mrkody/cdek",
+  "description": "Inegration (SDK) with CDEK API on PHP",
+  "keywords": [
+    "cdek",
+    "sdk",
+    "integration",
+    "REST"
+  ],
+  "minimum-stability": "dev",
+  "license": "proprietary",
+  "type": "extension",
+  "authors": [
+    {
+      "name": "mr_kody",
+      "email": "kody1994@mail.ru"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "mrkody\\cdek\\": ""
+    }
+  },
+  "require": {
+    "php": ">=5.3.0",
+    "guzzle/guzzle": "3.9.*@dev",
+    "openlss/lib-array2xml": "0.0.9"
+  }
+}
