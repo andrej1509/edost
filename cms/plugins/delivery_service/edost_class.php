@@ -434,7 +434,8 @@ var $test=0; //включить тестовый вывод =1
 
 			if ( isset($_POST['edost_kod']) ) $this -> kod=1; else $this -> kod=0;
 
-			$weight  = preg_replace("/[^\d.]/","",preg_replace("/,/",".", substr($_POST['edost_weight'],0,5) )); //вес в кг
+			$weight  = preg_replace("/[^\d.]/","",preg_replace("/,/",".", substr($_POST['edost_weight'],0,5) )); //вес в граммах
+			$weight = $weight/1000; //вес в килограммах
 			$to_city = trim(preg_replace("/[^a-z0-9а-€ј-я-(),.' ]/i","", substr($this -> utf8_win($_POST['edost_to_city']),0,100))); //город доставки
 			$strah = preg_replace("/[^\d.]/","",preg_replace("/,/",".", substr($_POST['edost_strah'],0,12) )); //сумма дл€ страховки
 			if ($strah=="") $strah = 0;
