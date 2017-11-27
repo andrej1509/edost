@@ -5,16 +5,20 @@ function OnClickOnLeads() {
   var destCity = document.getElementById('edost_to_city');
   var currAdress = leads.options[leads.selectedIndex].getAttribute('address');
   var currCity = leads.options[leads.selectedIndex].getAttribute('city');
+  var currDimens = leads.options[leads.selectedIndex].getAttribute('dimens');
   destAdress.value = currAdress;
   $("#dest_city").val(currCity);
   $("#edost_to_city").val(currCity);
     fillToReg();
+    fillDimensionsToID(currDimens);
   var lead = leads.options[leads.selectedIndex].value;
   var path =   '../cms/plugins/delivery_service/property_items.php';
   SendRequest('post', path ,'idlead='+lead, r_handler);
   };
 leads.addEventListener("change", OnClickOnLeads);
-
+    $( "#edost_dimens" ).change(function() {
+        changeDimens();
+    });
 });
 
 function CreateRequest()
@@ -129,4 +133,33 @@ function fillToReg() {
         $("#edost_weight").focus();
     }
 
+}
+
+
+
+function fillDimensions(q) {
+    if (q){
+        var d = q.split(/\D+/g);
+        $('#edost_lenght').val(d[0]);
+        $('#edost_width').val(d[1]);
+        $('#edost_height').val(d[2]);
+    }
+}
+
+function fillDimensionsToID(q) {
+    if (q){
+        $("#edost_dimens [value="+q+"]").attr("selected", "selected");
+        changeDimens();
+    }else{
+        $('#edost_lenght').val("");
+        $('#edost_width').val("");
+        $('#edost_height').val("");
+    }
+}
+function changeDimens() {
+    var q = $("#edost_dimens option:selected").text();
+    var d = q.split(/\D+/g);
+    $('#edost_lenght').val(d[0]);
+    $('#edost_width').val(d[1]);
+    $('#edost_height').val(d[2]);
 }

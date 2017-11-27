@@ -21,6 +21,7 @@ foreach ($sItems as $sItem){
 $sProps = $pObj->OnButtonLoadProps($sItem["PRODUCT_ID"]);
 $sWeight =  $sProps[CCMS::$SETS[SETTINGS_SECTION_BITRIX24][SETTINGS_BITRIX24_WEIGHT]]["value"]+$sWeight;
 };
+$sDimensions = $pObj->OnButtonLoadDim();
 
 $sResult = '';
 
@@ -123,6 +124,7 @@ switch ($sParam)
         }
 
             fillReg();
+            fillDimensions($('#edost_dimens option:selected').text());
 
 
     });
@@ -132,7 +134,7 @@ switch ($sParam)
         <select name="leads" id = "leads">
             <?foreach ($sLeads as $sLead){?>
 
-                 <option value="<?=$sLead["ID"]?>" address="<?=$sLead["ADDRESS"]?>" city="<?=$sLead["ADDRESS_CITY"]?>"><?=$sLead["TITLE"]?></option>
+                 <option value="<?=$sLead["ID"]?>" dimens="<?=$sLead[CBitrix24Config::FIELD_NAME_LEAD_PACKAGE_DIMENSIONS]?>"  address="<?=$sLead["ADDRESS"]?>" city="<?=$sLead["ADDRESS_CITY"]?>"><?=$sLead["TITLE"]?></option>
 
              <?}?>
         </select>
@@ -156,15 +158,30 @@ switch ($sParam)
     <label for="edost_weight">Вес,граммы:</label>
     <input type="text" id="edost_weight" name="edost_weight"  value="<?=$sWeight?>" style="width: 50px">
     <br><br>
-    <label for="edost_length">Длина посылки, см.:</label>
-    <input type="text" id="edost_length" name="edost_length" style="width: 50px">
+    <label for="edost_dimens">Размер посылки, см.:</label>
+    <select name="dimens" id = "edost_dimens">
+        <?foreach ($sDimensions as $IdDim => $sDimension){?>
+        <?if ($IdDim == $sLeads[0][CBitrix24Config::FIELD_NAME_LEAD_PACKAGE_DIMENSIONS])
+            {?>
+            <option selected value="<?=$IdDim?>"><?=$sDimension?></option>
+            <?}
+            else
+            {?>
+                <option value="<?=$IdDim?>"><?=$sDimension?></option>
+            <?}?>
+
+        <?}?>
+    </select>
     <br><br>
-    <label for="edost_width">Ширина посылки, см.:</label>
-    <input type="text" id="edost_width" name="edost_width" style="width: 50px">
+    <label style="display: none" for="edost_lenght">Длина посылки, см.:</label>
+    <input type="text" id="edost_lenght" name="edost_lenght" style="width: 50px;display: none">
+    <br><br>
+    <label style="display: none" for="edost_width">Ширина посылки, см.:</label>
+    <input type="text" id="edost_width" name="edost_width" style="width: 50px;display: none">
     <td><p id="Err1" style="color:red"></p></td>
     <br><br>
-    <label for="edost_height">Высота посылки, см.:</label>
-    <input type="text" id="edost_height" name="edost_height" style="width: 50px">
+    <label style="display: none" for="edost_height">Высота посылки, см.:</label>
+    <input type="text" id="edost_height" name="edost_height" style="width: 50px;display: none">
     <br><br>
     <input type="submit" value="Расчитать стоимость доставки Edost" name="B_Calc" onclick="cr1();">
 </form>

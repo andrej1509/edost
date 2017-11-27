@@ -15,7 +15,7 @@ class CBitrix24Config
     const FIELD_NAME_DEAL_DELIVERY_DATE = 'UF_CRM_1400396977'; // Дата доставки
     const FIELD_NAME_DEAL_RECIEVE_DATE = 'UF_CRM_1393427563'; // Дата вручения клиенту
     const FIELD_NAME_DEAL_END_DATE = 'CLOSEDATE'; // Дата завершения сделки
-
+    const FIELD_NAME_LEAD_PACKAGE_DIMENSIONS = 'UF_CRM_1511788770974'; /* Размеры упаковки. Значение должно иметь формат Размер1xРазмер2xРазмер3/ Разделение латинской маленькой "x"*/
     const FIELD_NAME_DEAL_PACKAGE_LOCATION = 'UF_CRM_1390938671'; // Местоположение посылки
     const FIELD_NAME_DEAL_RETURN_REASON_DESC = 'UF_CRM_1389789590'; // Дополнительно о причине возврата
 

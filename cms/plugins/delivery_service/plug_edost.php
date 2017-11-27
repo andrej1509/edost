@@ -45,6 +45,25 @@ class CEdost
          usort($arrLeadIDs, "cmp");
         return $arrLeadIDs;
     }
+
+    /**
+     */
+
+    public function LoadDim()
+    {
+        $arrDims = $this->pBitrix24->RestCommand(
+            'crm.lead.fields');
+
+        if (isset($arrDims[CBitrix24Config::FIELD_NAME_LEAD_PACKAGE_DIMENSIONS]))
+        {
+            $arrDims[CBitrix24Config::FIELD_NAME_LEAD_PACKAGE_DIMENSIONS]['items'];
+            foreach ( $arrDims[CBitrix24Config::FIELD_NAME_LEAD_PACKAGE_DIMENSIONS]['items'] as $arrPackage)
+            {
+                $this->arrBitrixPackageDimensions[$arrPackage['ID']] = $arrPackage['VALUE'];
+            }
+        }
+        return $this->arrBitrixPackageDimensions;
+    }
     /**
      * Для всех сделок в стадии "  " создается список заказов в личном кабинете
      * Возвращает true или массив с ошибками, который вернул СДЭК

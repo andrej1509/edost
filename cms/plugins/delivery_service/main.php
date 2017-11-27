@@ -80,6 +80,20 @@ class CDeliveryService extends CBasePluginClass
 
         return $arrResult;
     }
+    /**
+     * Формирование размеров посылки и выдача результата
+     *
+     * @return string
+     */
+    public function OnButtonLoadDim()
+    {
+        $arrResult = '';
+
+        $arrResult = $this->pEdost->LoadDim();
+
+        return $arrResult;
+    }
+
 
     /**
      * Формирование товаров и выдача результата
